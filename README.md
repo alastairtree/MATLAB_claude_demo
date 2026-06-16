@@ -62,6 +62,27 @@ python src/MatlabWrapper.py
 python src/MatlabWrapper.py "disp('running matlab code from the CLI via python')"
 ```
 
+## Running unit tests
+
+The HelloTest contains MATLAB unit tests using the built-in `matlab.unittest` framework.
+
+```bash
+# Run all tests and assert they pass
+matlab -nodesktop -batch "addpath('/workspaces/MATLAB_claude_demo/src'); results = runtests('/workspaces/MATLAB_claude_demo/tests/HelloTest.m'); disp(results); assert(all([results.Passed]), 'Tests failed')"
+```
+
+Expected output:
+```
+Running HelloTest
+hello world
+..
+Done HelloTest
+__________
+   2 Passed, 0 Failed, 0 Incomplete.
+```
+
+To add more tests, create a new class file in `tests/` that extends `matlab.unittest.TestCase`, then add methods annotated with `(Test)`.
+
 ## MATLAB projects
 
 By default the `src` folder is setup as a MATLAB project. IN vscode you right click a folder > MATLAB Project > New/Open. You can also open the project in the MATLAB UI by running `matlab` in the devcontainer terminal and then using the "Open Project" option in the MATLAB UI to open the `src` folder as a project. This will enable features like project paths, dependencies, etc.

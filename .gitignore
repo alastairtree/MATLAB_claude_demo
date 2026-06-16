@@ -1,0 +1,82 @@
+# Windows
+*:Zone.Identifier
+
+#====== PYTHON ======
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# pyenv/uv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+#====== MATLAB ======
+
+# Autosave files
+*.asv
+*.m~
+*.autosave
+*.slx.r*
+*.mdl.r*
+*.bak
+
+# Derived content-obscured files
+*.p
+
+# Compiled MEX files
+*.mex*
+
+# Packaged app and toolbox files
+*.mlappinstall
+*.mltbx
+
+# Deployable archives
+*.ctf
+
+# Generated helpsearch folders
+helpsearch*/
+
+# Code generation folders
+slprj/
+sccprj/
+codegen/
+
+# Cache files
+*.slxc
+
+# Cloud based storage dotfile
+.MATLABDriveTag

@@ -64,24 +64,39 @@ python src/MatlabWrapper.py "disp('running matlab code from the CLI via python')
 
 ## Running unit tests
 
-The HelloTest contains MATLAB unit tests using the built-in `matlab.unittest` framework.
+Use the test runner script to discover and run all tests:
 
 ```bash
-# Run all tests and assert they pass
-matlab -nodesktop -batch "addpath('/workspaces/MATLAB_claude_demo/src'); results = runtests('/workspaces/MATLAB_claude_demo/tests/HelloTest.m'); disp(results); assert(all([results.Passed]), 'Tests failed')"
+bash run_tests.sh
 ```
 
-Expected output:
+The runner automatically discovers every `Test*.m` and `*Test.m` file inside the `tests/` folder, runs them, and prints a summary:
+
 ```
-Running HelloTest
-hello world
-..
-Done HelloTest
-__________
-   2 Passed, 0 Failed, 0 Incomplete.
+Discovered 1 test file(s) in .../tests
+  HelloTest.m
+
+ Running HelloTest
+   Running HelloTest/testHelloReturnsCorrectMessage ...  Done (0.25s)
+   Running HelloTest/testHelloOutputIsString ...  Done (0.01s)
+
+========================================
+  TEST SUMMARY
+========================================
+  Files:      1
+  Tests:      2
+  Passed:     2
+  Failed:     0
+  Incomplete: 0
+  Duration:   0.258 s
+----------------------------------------
+  RESULT: ALL PASSED
+========================================
 ```
 
-To add more tests, create a new class file in `tests/` that extends `matlab.unittest.TestCase`, then add methods annotated with `(Test)`.
+The script exits with code `0` on success and `1` if any test fails or is incomplete, making it suitable for CI pipelines.
+
+To add more tests, create a class file named `Test*.m` or `*Test.m` in `tests/` that extends `matlab.unittest.TestCase` and annotate test methods with `(Test)`.
 
 ## MATLAB projects
 

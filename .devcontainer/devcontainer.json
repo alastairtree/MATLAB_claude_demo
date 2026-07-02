@@ -11,19 +11,18 @@
 			"products": "MATLAB Statistics_and_Machine_Learning_Toolbox Signal_Processing_Toolbox Curve_Fitting_Toolbox",
 			"startInDesktop": "false"
 		},
-        "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+		"ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
-
-    "remoteEnv": {
-        // Forward the license server environment variable from the host machine to the devcontainer:
-        "MLM_LICENSE_FILE": "${localEnv:MLM_LICENSE_FILE}",
-        // Or just set it to the license server directly:
-        // "MLM_LICENSE_FILE": "27000@your-license-server"
-
-		// Propagate the GitHub token from the local environment to the container for use in scripts and tools that require authentication.
-        // this saves habing to login to GH all the time
-        "GH_TOKEN": "${localEnv:GH_TOKEN}"
-
+	"remoteEnv": {
+		// Forward the license server environment variable from the host machine to the devcontainer:
+		"MLM_LICENSE_FILE": "${localEnv:MLM_LICENSE_FILE}",
+		// Or just set it to the license server directly:
+		// "MLM_LICENSE_FILE": "27000@your-license-server"
+		// Propagate the GitHub token from the local environment to the container for use in scripts 
+		// and tools that require authentication.
+		// this saves habing to login to GH all the time
+		"GH_TOKEN": "${localEnv:GH_TOKEN}"
 	},
 	"customizations": {
 		"vscode": {
@@ -32,22 +31,16 @@
 			]
 		}
 	},
-
 	"mounts": [
-    // shared claude code config volume for all containers so that devcontainer rebuilds maintain config
-       "source=claude-code-config,target=/home/vscode/.claude,type=volume"
-    ],
-
+		// shared claude code config volume for all containers so that devcontainer rebuilds maintain config
+		"source=claude-code-config,target=/home/vscode/.claude,type=volume"
+	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "mkdir -p  $HOME/Documents/MATLAB",
-	
-
+	"postCreateCommand": "mkdir -p  $HOME/Documents/MATLAB && sudo chown -R vscode:vscode $HOME/.claude"
 	// Configure tool-specific properties.
 	// "customizations": {},
-
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
 }

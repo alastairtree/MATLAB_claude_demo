@@ -20,6 +20,10 @@
         // Or just set it to the license server directly:
         // "MLM_LICENSE_FILE": "27000@your-license-server"
 
+		// Propagate the GitHub token from the local environment to the container for use in scripts and tools that require authentication.
+        // this saves habing to login to GH all the time
+        "GH_TOKEN": "${localEnv:GH_TOKEN}"
+
 	},
 	"customizations": {
 		"vscode": {
@@ -28,6 +32,11 @@
 			]
 		}
 	},
+
+	"mounts": [
+    // shared claude code config volume for all containers so that devcontainer rebuilds maintain config
+       "source=claude-code-config,target=/home/vscode/.claude,type=volume"
+    ],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

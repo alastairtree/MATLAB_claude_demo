@@ -33,15 +33,17 @@ The devcontainer.json file should have the following line in the "remoteEnv" sec
     },
 ```
 
+There are 2 devcontainers to choose from. The `devcontainer.json` file builds the container from scratch and installs MATLAB. The `devcontainer_prebuilt.json` file uses a prebuilt image with MATLAB already installed as well as a lots of other useful stuff. Images are available for various versions. The prebuilt image is faster to build, but you will need to rebuild it if you want to tweak the MATLAB install.
+
 ## Access the MATLAB UI
 
-Option 1: You can run the MATLAB UI inside the devcontainer by running `matlab` in the devcontainer terminal. This will open a new window with the MATLAB UI from linux. This is linux MATLAB inside the container, not windows MATLAB already installed on your machine. You can also run MATLAB commands from the command line in the devcontainer terminal.
+Option 1: (Prebuilt image only) Use matlab-proxy to open the linux matlab ui in a browser. Works well and starts automatically when the container starts. You can also start it manually by running `matlab-proxy` in the devcontainer terminal and then opening a browser to http://localhost:8888. You will need to sign in to your account or use the ENV var to let it locate your licence server.
 
-Option 2: Desktop MATLAB, in windows, can read files from the WSL2 filesystem. You can open MATLAB in windows and then use the `cd` command to change to the path of the cloned repository (e.g., `cd \\wsl.localhost\Ubuntu-XX.XX\home\username\matlab-claude-demo`) to access the files.
+Option 2: You can run the MATLAB UI inside the devcontainer by running `matlab` in the devcontainer terminal. This will open a new window with the MATLAB UI from linux. This is linux MATLAB inside the container, not windows MATLAB already installed on your machine. You can also run MATLAB commands from the command line in the devcontainer terminal.
+
+Option 3: Desktop MATLAB, in windows, can read files from the WSL2 filesystem. You can open MATLAB in windows and then use the `cd` command to change to the path of the cloned repository (e.g., `cd \\wsl.localhost\Ubuntu-XX.XX\home\username\matlab-claude-demo`) to access the files.
 
 The MATLAB VSCode Extension (pre-installed in devcontainer) will also enable basic running and debugging of files inside vscode. See https://marketplace.visualstudio.com/items?itemName=MathWorks.language-matlab for more info.
-
-Option 3: Use the proxy and access MATLAB UI from your browser. Use the devcontainer setting startInDesktop to start matlab-proxy when container starts.
 
 ## Use the MATLAB CLI
 

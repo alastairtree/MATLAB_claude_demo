@@ -1,6 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
+	"name": "MATLAB devcontainer demo (local build)",
 	"image": "mcr.microsoft.com/devcontainers/base:noble",
 	"features": {
 		"ghcr.io/devcontainers/features/python:1": {
@@ -27,14 +28,20 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"MathWorks.language-matlab"
+				"MathWorks.language-matlab",
+				"ms-python.python",
 			]
 		}
 	},
 	"mounts": [
 		// shared claude code config volume for all containers so that devcontainer rebuilds maintain config
-		"source=claude-code-config,target=/home/vscode/.claude,type=volume"
+		"source=claude-code-config,target=/home/vscode/.claude,type=volume",
 	],
+
+	"hostRequirements": {
+        "cpus": 4
+    },
+
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.

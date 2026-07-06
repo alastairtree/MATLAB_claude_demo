@@ -1,0 +1,56 @@
+{
+    // See https://github.com/ImperialCollegeLondon/mag-lab-matlab-devcontainers
+    // Prebuit image for MATLAB development in VS Code and GitHub Codespaces.
+    "name": "MATLAB devcontainer demo (prebuilt)",
+    "image": "ghcr.io/imperialcollegelondon/mag-lab-matlab-devcontainers:r2026a",
+    "remoteUser": "vscode",
+    "containerUser": "vscode",
+
+    // matlab-proxy is baked into the image and starts automatically; this just
+    // controls its port and how VS Code/Codespaces surfaces it.
+    "containerEnv": {
+        "MWI_APP_PORT": "8888"
+    },
+
+    "remoteEnv": {
+		// Forward the license server environment variable from the host machine to the devcontainer:
+		"MLM_LICENSE_FILE": "${localEnv:MLM_LICENSE_FILE}",
+		// Or just set it to the license server directly:
+		// "MLM_LICENSE_FILE": "27000@your-license-server"
+
+		// Propagate the GitHub token from the local environment to the container for use in scripts 
+		// and tools that require authentication.
+		// this saves habing to login to GH all the time
+		"GH_TOKEN": "${localEnv:GH_TOKEN}"
+	},
+
+    // MATLAB in this demo container needs a MathWorks Online license (no network
+    // license server is reachable from Codespaces) - matlab-proxy will prompt you
+    // to sign in with your MathWorks account the first time you open it.
+    // look at the matlab-proxy command line output for the url and token to open it in your browser
+
+    "forwardPorts": [8888],
+    "portsAttributes": {
+        "8888": {
+            "label": "MATLAB (matlab-proxy)",
+            "onAutoForward": "openPreview"
+        }
+    },
+    "hostRequirements": {
+        "cpus": 4
+    },
+
+    "mounts": [
+		// shared claude code config volume for all containers so that devcontainer rebuilds maintain config
+		"source=claude-code-config,target=/home/vscode/.claude,type=volume",
+	],
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "MathWorks.matlab"
+            ]
+        }
+    }
+}
